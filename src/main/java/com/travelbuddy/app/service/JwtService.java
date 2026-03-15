@@ -3,6 +3,7 @@ package com.travelbuddy.app.service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -11,7 +12,8 @@ import java.util.UUID;
 @Service
 public class JwtService {
 
-    private final String SECRET = "very-secret-key-change-this";
+    @Value("${jwt.secret")
+    private String SECRET;
 
     public String generateToken(UUID userId) {
 
