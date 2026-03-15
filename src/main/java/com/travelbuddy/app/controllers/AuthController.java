@@ -15,18 +15,13 @@ public class AuthController {
     private final AuthService authService;
 
     @MutationMapping
-    public AuthResponse register(
-            @Argument RegisterInput input
-    ) {
+    public AuthResponse register(@Argument RegisterInput input) {
 
         return authService.register(input);
     }
 
     @MutationMapping
-    public AuthResponse login(
-            @Argument String email,
-            @Argument String password
-    ) {
+    public AuthResponse login(@Argument String email, @Argument String password) {
 
         return authService.login(email, password);
     }
