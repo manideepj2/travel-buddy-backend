@@ -1,3 +1,8 @@
+type Query {
+    # Dummy query to satisfy the GraphQL requirement. You can replace this later with a real query.
+    hello: String
+}
+
 type Mutation {
 
     register(
