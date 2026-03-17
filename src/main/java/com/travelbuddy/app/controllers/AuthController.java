@@ -1,34 +1,36 @@
 package com.travelbuddy.app.controllers;
 
 import com.travelbuddy.app.model.AuthResponse;
+import com.travelbuddy.app.model.LoginInput;
 import com.travelbuddy.app.model.RegisterInput;
 import com.travelbuddy.app.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1")
 public class AuthController {
 
     private final AuthService authService;
 
-    @QueryMapping
+    @GetMapping("/health")
     public String hello() {
         return "TravelBuddy API running";
     }
 
-    @MutationMapping
-    public AuthResponse register(@Argument RegisterInput input) {
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterInput input) {
 
-        return authService.register(input);
+        return ResponseEntity.ok(authService.register(input));
     }
 
-    @MutationMapping
-    public AuthResponse login(@Argument String email, @Argument String password) {
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginInput input) {
 
-        return authService.login(email, password);
+        return ResponseEntity.ok(authService.login(input.getEmail(), input.getPassword()));
     }
 }
