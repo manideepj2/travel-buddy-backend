@@ -47,7 +47,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 return;
             }
 
-            // 5. Extract userId
+            // 5. Extract userId, get the context from the token
             UUID userId = jwtService.extractUserId(token);
 
             // 6. Create authentication object
@@ -59,6 +59,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     );
 
             // 7. Set authentication in context
+
+            /*Because your app is stateless, Spring forgets who the user is after every request.
+             This is why you must set the SecurityContext
+            inside your JwtAuthFilter on every single incoming request.*/
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
         } catch (Exception e) {
