@@ -1,7 +1,11 @@
 package com.travelbuddy.app.exceptions;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
+@Getter
+@Setter
 public class CoreException extends RuntimeException {
 
     private final HttpStatus status;
@@ -10,13 +14,5 @@ public class CoreException extends RuntimeException {
         super(message);
         this.status = status;
         this.message = message;
-    }
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
     }
 }
